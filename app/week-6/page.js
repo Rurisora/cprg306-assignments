@@ -21,3 +21,8 @@ export default function Page() {
         </main>
     )
 }
+
+//const handleAddItem is a function that takes an item as an argument and updates the items state by adding the new item into the existing list of items. setItems is used to update the state.
+
+//onAddItem is a prop that is passed to the newItem component, which allowes the newItem component to call the handleAddItem function when new item is added. 
+

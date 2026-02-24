@@ -23,15 +23,18 @@ export default function ItemList({items}) {
             if (!groups[cat]) groups[cat] = [];
             groups[cat].push(item);
         });
-        
+    
+    //sortedCategories is an array that store the category name as string and sort them alphabetically. Object.keys is used to get the keys of the groups object (name of the category) and return  as an array then sort them alphabetically.
         const sortedCategories = Object.keys(groups).sort();
-
+    
+    //renderedItems is an array to store the list with category as header and items under the category. forEach to loop through the sortedCategories to push the header and items into the renderedItems array.
         renderedItems = [];
         sortedCategories.forEach((cat) => {
             renderedItems.push(
                 <li key={`header-${cat}`} className="text-2xl font-bold ml-4">{cat.toUpperCase()}</li>
             )
-            
+     
+    //groups[cat] is the array of items that sort them by name alphabetically then render into a list with category as header and items under the category.
         groups[cat]
             .sort((a, b) => a.name.localeCompare(b.name))
             .forEach((item) => {
@@ -40,7 +43,7 @@ export default function ItemList({items}) {
         })
     }
 
-    // //sortedItems alphabectically base on sortBy Name or Category. localeCompare use to compare string alphabetically. (a and b are the two items to compare) 
+    //sortedItems alphabectically base on sortBy Name or Category. localeCompare use to compare string alphabetically. (a and b are the two items to compare) 
     // const sortedItems = [...items].sort((a, b) => {
     //     if(sortBy === "name") {
     //         return a.name.localeCompare(b.name);
@@ -70,3 +73,6 @@ export default function ItemList({items}) {
         </div>
     );
 }
+
+// className={`px-3 py-1 rounded-md border-2 border-blue-700 ${sortBy === "groupCategory" ? "bg-blue-300 text-black" : "bg-black"}`} is used to conditionally apply styles to the button based on whether it is the currently selected sorting option. if sortBy is matched by name, category, or groupCategory, the button will have a blue background and black text to show that it is being selected, otherwise it will have the regular setting black background and white text. This should be noted to use for future when I need to show immediate feedback to user on their selection. 
+//Format should be className={`base styles ${condition ? "style if true" : "style if false"}`} to apply conditional styling in React. default styles are applied to all buttons, and then additional styles are applied based on the condition that check if the button is the currently selected sorting option.
