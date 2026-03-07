@@ -22,7 +22,7 @@ export default function NewItem({onAddItem}) {
         "Other",
     ]
 
-    //handleSubmit function
+    //handleSubmit function remover alert and console log, add onAddItem function to pass item (with id random generate by crypto.randomUUID()) to add into the list.
     const handleSubmit = (e) => {e.preventDefault()
     
         const item = {
