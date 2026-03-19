@@ -1,6 +1,6 @@
 "use client";
 import { useUserAuth } from "../contexts/AuthContext";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
     const {user, gitHubSignIn, googleSignIn, firebaseSignOut } = useUserAuth();
