@@ -10,7 +10,7 @@ import {
 
 //modified the path from /firebase to -> ../utils/firebase due to the structure of folder by assignment guide line.
 import {auth } from "../utils/firebase"
-
+import { GoogleAuthProvider } from "firebase/auth";
  
 const AuthContext = createContext();
  
@@ -34,14 +34,17 @@ export const AuthContextProvider = ({ children }) => {
   }, [user]);
  
   return (
-    <AuthContext.Provider value={{ user, gitHubSignIn, firebaseSignOut }}>
+    <AuthContext.Provider value={{ user, gitHubSignIn, googleSignIn,firebaseSignOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
  
-
-
 export const useUserAuth = () => {
   return useContext(AuthContext);
+};
+
+const googleSignIn = () => {
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
 };
