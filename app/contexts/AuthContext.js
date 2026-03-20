@@ -6,21 +6,27 @@ import {
   signOut,
   onAuthStateChanged,
   GithubAuthProvider,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 //modified the path from /firebase to -> ../utils/firebase due to the structure of folder by assignment guide line.
 import {auth } from "../utils/firebase"
-import { GoogleAuthProvider } from "firebase/auth";
  
 const AuthContext = createContext();
  
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
  
+  const githubProvider = new GithubAuthProvider();
+  const googleProvider = new GoogleAuthProvider();
+  
   const gitHubSignIn = () => {
-    const provider = new GithubAuthProvider();
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, githubProvider);
   };
+
+  const googleSignIn = () => {
+  return signInWithPopup(auth, googleProvider);
+};
  
   const firebaseSignOut = () => {
     return signOut(auth);
@@ -31,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
       setUser(currentUser);
     });
     return () => unsubscribe();
-  }, [user]);
+  }, []);
  
   return (
     <AuthContext.Provider value={{ user, gitHubSignIn, googleSignIn,firebaseSignOut }}>
@@ -44,7 +50,3 @@ export const useUserAuth = () => {
   return useContext(AuthContext);
 };
 
-const googleSignIn = () => {
-  const provider = new GoogleAuthProvider();
-  return signInWithPopup(auth, provider);
-};
