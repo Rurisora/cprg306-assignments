@@ -1,9 +1,9 @@
-import { db } from "../utils/firebase";
+import { db } from "@/app/utils/firebase";
 import { collection, getDocs, addDoc, query } from "firebase/firestore";
 
 export async function getItems(userId) {
     try {
-        const itemsRef = collection(db, "user", userId, "items");
+        const itemsRef = collection(db, "users", userId, "items");
         const snapshot = await getDocs(query(itemsRef));
 
         return snapshot.docs.map((doc) => ({
@@ -27,3 +27,12 @@ export async function addItem(userId, item) {
     }
 }
 
+export async function deleteItem(userId, itemId) {
+    try {
+        const itemRef = doc(db, "users", userId, "items", itemId);
+        await deleteDoc(itemRef);
+    } catch (error) {
+        console.error("deleteItem error: ", error);
+        throw error;
+    }
+}

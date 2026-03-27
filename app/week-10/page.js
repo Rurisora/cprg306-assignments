@@ -50,7 +50,7 @@ export default function LandingPage() {
                 <div className="flex flex-col items-center gap-4 bg-white p-6 rounded-xl shadow-lg">
                     <p className="text-xl text-black">Welcome to the Shopping List, {user.displayName || user.email}</p>
                     <div className="flex flex-col sm:flex-row gap-3">
-                        <a href="/week-9/shopping-list" className="px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition-colors text-center">Go to Shopping List</a>
+                        <a href="/week-10/shopping-list" className="px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-600 transition-colors text-center">Go to Shopping List</a>
                         <button onClick={handleLogout} className="px-4 py-2 bg-red-500 text-white rounded-md shadow hover:bg-red-700 transition-colors">Logout</button>
                     </div>
 

@@ -1,6 +1,5 @@
 "use client";
-import { useState } from "react";
-import { useEffect} from "react";
+import { useState, useEffect } from "react";
 import ItemList from "./itemlist";
 import NewItem from "./NewItem";
 import MealIdeas from "./mealIdeas";
@@ -15,7 +14,7 @@ export default function Page() {
     const [selectedItemName, setSelectedItemName] = useState("");
 
     const loadItems = async () => {
-        if (!user) return;
+        if (!user?.uid) return;
 
         try {
             const userItems = await getItems(user.uid);
@@ -26,11 +25,13 @@ export default function Page() {
     };
 
     useEffect(() => {
-        loadItems();
-    }, [user]);
+        if (user?.uid) {
+            loadItems();
+        }
+    }, [user?.uid]);
 
     const handleAddItem = async (item) => {
-        if (!user) return;
+        if (!user?.uid) return;
 
         try {
             const id = await addItem(user.uid, item);
